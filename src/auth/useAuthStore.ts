@@ -1,9 +1,10 @@
 import { create } from "zustand";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
+import type { IUser } from "../interfaces/IUser";
 
 interface AuthState {
   token: string | null;
-  user: any | null;
+  user: IUser | null;
   setToken: (token: string) => void;
   logout: () => void;
 }
