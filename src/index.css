@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Raleway";
+  src: url("./assets/fonts/Raleway-VariableFont_wght.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  font-family: Raleway;
+  line-height: 1.5;
+
+  color: #191A1A;
+  background-color: #D0CED1;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
