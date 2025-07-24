@@ -9,6 +9,7 @@ export default function Home() {
     <main>
       <H1>Home</H1>
       <Anchor onClick={() => navigate("/signin")}>Login</Anchor>
+      <Anchor onClick={() => navigate("/signup")}>Cadastro</Anchor>
     </main>
   );
 }

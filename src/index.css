@@ -17,8 +17,8 @@
   font-family: "Raleway", sans-serif;
   line-height: 1.5;
 
-  color: #171A1F;
-  background-color: #D0CED1;
+  color: #171a1f;
+  background-color: #d0ced1;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -29,5 +29,4 @@
 body {
   min-width: 320px;
   min-height: 100vh;
-  place-items: center;
 }
