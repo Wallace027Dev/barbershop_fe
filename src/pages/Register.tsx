@@ -18,20 +18,42 @@ const Form = styled.div`
   justify-content: center;
 `;
 
-const Input = styled.input`
+const Button = styled.button`
+  height: 3.75rem;
   width: 100%;
   min-width: 18.75rem;
-  min-height: 3.5rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: #1e707b;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 2rem;
+  transition: background 0.3s ease, color 0.3s ease;
+  border: 2px solid #1e707b;
+  cursor: pointer;
+
+  &:hover {
+    background: #d0ced1;
+    color: #1e707b;
+  }
+`;
+
+const Input = styled.input`
+  height: 3.5rem;
+  width: 100%;
+  min-width: 18.75rem;
   color: rgba(23, 26, 31, 70);
   background: #d0ced1;
   font-size: 1rem;
-  border: none;
+  border: 2px solid rgba(0, 0, 0, 0.25);
   border-radius: 0.75rem;
   padding: 1.25rem 1rem;
   box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
 
   &:focus {
     outline: none;
+    border-color: #38a5a8;
   }
 
   & + & {
@@ -71,7 +93,7 @@ export default function Register() {
         <Input type="password" {...register("password")} placeholder="Senha" />
         {errors.password && <p>{errors.password.message}</p>}
 
-        <button type="submit">Entrar</button>
+        <Button type="submit">Entrar</Button>
       </Form>
     </Main>
   );
