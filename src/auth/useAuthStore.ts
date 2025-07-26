@@ -1,27 +1,38 @@
 import { create } from "zustand";
 import { jwtDecode } from "jwt-decode";
-import type { IUser } from "../interfaces/IUser";
+
+type TokenPayload = {
+  id: string;
+  email: string;
+  role?: string;
+  exp?: number;
+};
 
 interface AuthState {
   token: string | null;
-  user: IUser | null;
+  user: TokenPayload | null;
+
   setToken: (token: string) => void;
   logout: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  token: localStorage.getItem("token"),
-  user: localStorage.getItem("token")
-    ? jwtDecode(localStorage.getItem("token")!)
-    : null,
+export const useAuthStore = create<AuthState>((set) => {
+  const token = localStorage.getItem("token");
+  const user = token ? jwtDecode<TokenPayload>(token) : null;
 
-  setToken: (token: string) => {
-    localStorage.setItem("token", token);
-    set({ token, user: jwtDecode(token) });
-  },
+  return {
+    token,
+    user,
 
-  logout: () => {
-    localStorage.removeItem("token");
-    set({ token: null, user: null });
-  }
-}));
+    setToken: (newToken: string) => {
+      const decoded = jwtDecode<TokenPayload>(newToken);
+      localStorage.setItem("token", newToken);
+      set({ token: newToken, user: decoded });
+    },
+
+    logout: () => {
+      localStorage.removeItem("token");
+      set({ token: null, user: null });
+    },
+  };
+});

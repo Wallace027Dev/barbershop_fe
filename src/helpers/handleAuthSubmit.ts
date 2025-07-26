@@ -1,7 +1,8 @@
-import axios from "axios";
 import type React from "react";
-import { toast } from "react-toastify";
+import axios from "axios";
 import api from "../api/axios";
+import { toast } from "react-toastify";
+import { jwtDecode } from "jwt-decode";
 
 interface SubmitOptions<T> {
   url: string;
@@ -31,9 +32,13 @@ export async function handleAuthSubmit<T>({
   try {
     const response = await api.post(`/auth${url}`, data);
     const message = response.data.message || successMessage;
-    const userId = response.data.userId;
-    
-    setToken(response.data.token);
+
+    const token = response.data.token;
+    setToken(token);
+    console.log(jwtDecode(token));
+
+    const decoded = jwtDecode<{ user: string }>(token);
+    const userId = decoded.user;
 
     toast.success(message, {
       toastId: toastIdSuccess,
