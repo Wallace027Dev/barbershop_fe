@@ -1,34 +1,21 @@
-import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import logo from "../../assets/images/click-beard-logo.png";
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  LoginSchema,
-  type LoginFormData,
-} from "../../schemas/UserSchema";
+import { LoginSchema, type LoginFormData } from "../../schemas/UserSchema";
 import { useAuthStore } from "../../auth/useAuthStore";
+import { handleAuthSubmit } from "../../helpers/handleAuthSubmit";
 
 import { Anchor } from "../../components/Link";
 import { Spinner } from "../../components/Spinner";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/SubmitButton";
 import { Form } from "../../components/ui/Form";
-import { handleFormSubmit } from "./submitHandler";
+import { Main } from "../Register/style";
 
-const Main = styled.main`
-  max-width: 25rem;
-  margin: 1.5rem auto;
-
-  img {
-    min-width: 17.5rem;
-    width: 100%;
-  }
-`;
-
-export default function Register() {
+export default function Login() {
   const {
     register,
     handleSubmit,
@@ -40,11 +27,18 @@ export default function Register() {
   const setToken = useAuthStore((s) => s.setToken);
   const navigate = useNavigate();
 
-  async function onSubmit(data: LoginFormData) {
-    const result = await handleFormSubmit(data, setIsLoading, setToken);
-    if (result === "success") {
-      setTimeout(() => navigate("/dashboard"), 1000);
-    }
+  async function onSubmit(loginData: LoginFormData) {
+    await handleAuthSubmit({
+      url: "/signin",
+      data: loginData,
+      navigate,
+      setIsLoading,
+      setToken,
+      successMessage: "Usuário conectado com sucesso!",
+      errorMessage: "Erro ao tentar conectar!",
+      toastIdSuccess: "signin-success",
+      toastIdError: "signin-error",
+    });
   }
 
   return (

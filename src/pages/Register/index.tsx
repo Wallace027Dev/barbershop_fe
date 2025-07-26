@@ -1,32 +1,22 @@
-import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import logo from "../../assets/images/click-beard-logo.png";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useAuthStore } from "../../auth/useAuthStore";
+import { handleAuthSubmit } from "../../helpers/handleAuthSubmit";
 import {
   BaseUserSchema,
   type RegisterFormData,
 } from "../../schemas/UserSchema";
-import { useAuthStore } from "../../auth/useAuthStore";
-import { handleFormSubmit } from "./submitHandler";
 
 import { Anchor } from "../../components/Link";
 import { Spinner } from "../../components/Spinner";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/SubmitButton";
 import { Form } from "../../components/ui/Form";
-
-const Main = styled.main`
-  max-width: 25rem;
-  margin: 1.5rem auto;
-
-  img {
-    min-width: 17.5rem;
-    width: 100%;
-  }
-`;
+import { Main } from "./style";
 
 export default function Register() {
   const {
@@ -40,11 +30,18 @@ export default function Register() {
   const setToken = useAuthStore((s) => s.setToken);
   const navigate = useNavigate();
 
-  async function onSubmit(data: RegisterFormData) {
-    const result = await handleFormSubmit(data, setIsLoading, setToken);
-    if (result === "success") {
-      setTimeout(() => navigate("/dashboard"), 1000);
-    }
+  async function onSubmit(registerData: RegisterFormData) {
+    await handleAuthSubmit({
+      url: "/auth/signup",
+      data: registerData,
+      navigate,
+      setIsLoading,
+      setToken,
+      successMessage: "Usuário criado com sucesso!",
+      errorMessage: "Erro ao criar usuário!",
+      toastIdSuccess: "signup-success",
+      toastIdError: "signup-error",
+    });
   }
 
   return (
