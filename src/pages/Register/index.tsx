@@ -11,10 +11,10 @@ import {
   type RegisterFormData,
 } from "../../schemas/UserSchema";
 
-import { Anchor } from "../../components/Link";
-import { Spinner } from "../../components/Spinner";
-import { Input } from "../../components/Input";
-import { Button } from "../../components/SubmitButton";
+import { Anchor } from "../../components/ui/Link";
+import { Spinner } from "../../components/ui/Spinner";
+import { Input } from "../../components/ui/Input";
+import { Button } from "../../components/ui/Button";
 import { Form } from "../../components/ui/Form";
 import { Main } from "./style";
 
@@ -32,7 +32,7 @@ export default function Register() {
 
   async function onSubmit(registerData: RegisterFormData) {
     await handleAuthSubmit({
-      url: "/auth/signup",
+      url: "/signup",
       data: registerData,
       navigate,
       setIsLoading,
@@ -72,8 +72,9 @@ export default function Register() {
 
         <span>
           Já possui uma conta?{" "}
-          <Anchor onClick={() => navigate("/signin")}>Clique aqui!</Anchor>
+          <Anchor onClick={() => navigate("/")}>Clique aqui!</Anchor>
         </span>
+
         <Button disabled={isLoading} type="submit">
           {isLoading ? <Spinner /> : "Cadastrar"}
         </Button>

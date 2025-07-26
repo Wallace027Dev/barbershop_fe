@@ -8,12 +8,12 @@ import { LoginSchema, type LoginFormData } from "../../schemas/UserSchema";
 import { useAuthStore } from "../../auth/useAuthStore";
 import { handleAuthSubmit } from "../../helpers/handleAuthSubmit";
 
-import { Anchor } from "../../components/Link";
-import { Spinner } from "../../components/Spinner";
-import { Input } from "../../components/Input";
-import { Button } from "../../components/SubmitButton";
+import { Spinner } from "../../components/ui/Spinner";
+import { Input } from "../../components/ui/Input";
+import { Button } from "../../components/ui/Button";
 import { Form } from "../../components/ui/Form";
 import { Main } from "../Register/style";
+import { NotAccountContainer } from "./style";
 
 export default function Login() {
   const {
@@ -60,14 +60,19 @@ export default function Login() {
           errorMessage={errors.password?.message}
         />
 
-        <span>
-          Já não possui uma conta?{" "}
-          <Anchor onClick={() => navigate("/signup")}>Clique aqui!</Anchor>
-        </span>
         <Button disabled={isLoading} type="submit">
           {isLoading ? <Spinner /> : "Conectar"}
         </Button>
       </Form>
+
+      <hr />
+
+      <NotAccountContainer>
+        <span>Não possui uma conta?</span>
+        <Button onClick={() => navigate("/signup")} $variant="unfilled" disabled={isLoading} type="button">
+          Criar conta
+        </Button>
+      </NotAccountContainer>
     </Main>
   );
 }

@@ -27,9 +27,9 @@
 
 body {
   min-width: 320px;
-  min-height: 100vh;
 }
 
+/* Classes globais */
 .my-custom-error-toast {
   background-color: white !important;
   color: #a60b0b !important;
