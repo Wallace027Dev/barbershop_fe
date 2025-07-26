@@ -3,20 +3,21 @@ import { UserRole } from "../types/UserRole";
 import { parseSchema } from "./parseSchema";
 import type { IUserBase } from "../interfaces/IUser";
 
-export const loginSchema = z.object({
+export const LoginSchema = z.object({
   email: z.email(),
   password: z.string().min(6),
 });
 
-export type LoginFormData = z.infer<typeof loginSchema>;
+export type LoginFormData = z.infer<typeof LoginSchema>;
 
-
-const BaseUserSchema = z.object({
+export const BaseUserSchema = z.object({
   name: z.string().min(1, "Nome muito curto").max(30, "Nome muito longo"),
   email: z.email("E-mail inválido"),
   password: z.string().min(6, "Senha muito curta"),
   role: z.enum(UserRole).optional(),
 });
+
+export type RegisterFormData = z.infer<typeof BaseUserSchema>;
 
 const UserSchemaWithoutPassword = BaseUserSchema.omit({ password: true }).partial();
 
