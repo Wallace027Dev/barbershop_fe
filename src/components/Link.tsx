@@ -1,24 +1,24 @@
 import styled from "styled-components";
 
 export const Anchor = styled.a`
-  color: #38a5a8;
+  color: #42592a;
   text-decoration: none;
+  font-size: 0.6rem;
+  font-weight: 500;
   cursor: pointer;
-  font-size: 1.2rem;
-
-  &:hover {
-    text-decoration: underline;
-    color: #17376b;
-  }
 
   @media (min-width: 768px) {
-    font-size: 1.5rem;
+    font-size: 1rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
 export function Link({
   children,
-  href
+  href,
 }: {
   children: React.ReactNode;
   href: string;

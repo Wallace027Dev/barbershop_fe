@@ -2,7 +2,6 @@
 @font-face {
   font-family: "Raleway";
   src: url("./assets/fonts/Raleway-VariableFont_wght.ttf") format("truetype");
-  font-weight: normal;
   font-style: normal;
 }
 
@@ -29,4 +28,26 @@
 body {
   min-width: 320px;
   min-height: 100vh;
+}
+
+.my-custom-error-toast {
+  background-color: white !important;
+  color: #a60b0b !important;
+  font-weight: 500 !important;
+  border: 1px solid #a60b0b;
+}
+
+.my-custom-error-toast .Toastify__progress-bar {
+  background: #a60b0b !important;
+}
+
+.my-custom-success-toast {
+  background-color: white !important;
+  color: #1e707b !important;
+  font-weight: 500 !important;
+  border: 1px solid #1e707b;
+}
+
+.my-custom-success-toast .Toastify__progress-bar {
+  background: #1e707b !important;
 }
